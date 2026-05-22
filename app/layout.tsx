@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import LightRays from "@/components/LightRays";
 import Navbar from "@/components/Navbar";
+import { PostHogProvider } from "@/components/PostHogProvider";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -46,7 +47,9 @@ export default function RootLayout({
             distortion={0.01}
           />
         </div>
-        <main className="">{children}</main>
+        <main className="">
+          <PostHogProvider>{children}</PostHogProvider>
+        </main>
       </body>
     </html>
   );
