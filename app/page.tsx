@@ -1,15 +1,11 @@
-import React from "react";
-import Hello from "./components/hello";
+import React from 'react'
 
 const page = () => {
-  console.log("Hello world !");
   return (
     <div>
-      <h1>Welcome to My Website</h1>
-      <p>Testing My Next.js page.</p>
-      <Hello />
+      
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page
