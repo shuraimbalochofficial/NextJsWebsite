@@ -14,10 +14,9 @@ export async function GET(
   { params }: RouteParams,
 ): Promise<NextResponse> {
   try {
-    await connectDB();
-
+      await connectDB();
+      
     const { slug } = await params;
-
     if (!slug || typeof slug !== "string" || slug.trim() === "") {
       return NextResponse.json(
         { message: "Invalid or missing slug parameter" },
