@@ -10,14 +10,34 @@ const EventDetailsPage = async ({
 }) => {
   const { slug } = await params;
   const request = await fetch(`${BASE_URL}/api/events/${slug}`);
-  const { event } = await request.json();
+  const {
+    event: {
+      description,
+      image,
+      overview,
+      date,
+      time,
+      location,
+      mode,
+      agenda,
+      audience,
+      tags,
+    },
+  } = await request.json();
 
-  if (!event) return notFound();
+  if (!description) return notFound();
   return (
     <section id="event">
-      <h1>
-        Event Details: <br /> {slug}
-      </h1>
+      <div className="header">
+        <h1>Event Description</h1>
+        <p className="mt-2">{description}</p>
+      </div>
+
+      <div className="details">
+        {/* L side */}
+        {/* R side */}
+        <aside className="booking"></aside>
+      </div>
     </section>
   );
 };
