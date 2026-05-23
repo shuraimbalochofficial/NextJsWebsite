@@ -16,15 +16,15 @@ export async function POST(req: NextRequest) {
     } catch (e) {
       return NextResponse.json(
         {
-          message: "Invalid JSON form data",
+          message: `Invalid JSON form data: ${e}`,
         },
         { status: 400 },
       );
     }
 
-    const file = formData.get("image");
+    const file = formData.get("image") as File;
 
-    if (!file) {
+    if (!file || !(file instanceof File)) {
       return NextResponse.json(
         { message: "Image file is required" },
         { status: 400 },
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
         .end(buffer);
     });
 
-    event.image = uploadResult.secure_url;
+    event.image = (uploadResult as { secure_url: string }).secure_url;
 
     const createdEvent = await Event.create(event);
 
@@ -69,4 +69,18 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// 2:28:00
+export async function GET() {
+  try {
+    connectDB();
+    const events = await Event.find().sort({ createdAt: -1 });
+    return NextResponse.json(
+      { message: "Events Fetched succesfully", events },
+      { status: 200 },
+    );
+  } catch (e) {
+    return NextResponse.json(
+      { message: "Failed to fetch events", error: e },
+      { status: 500 },
+    );
+  }
+}
