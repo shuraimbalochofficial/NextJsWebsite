@@ -12,7 +12,7 @@ Built with:
 * Tailwind
 * TypeScript
 
-## ✨ Features
+## Features
 
 * Minimalistic Landing Page
 * Fixed Nav Bar
